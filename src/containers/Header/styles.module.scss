@@ -1,0 +1,14 @@
+.container {
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px;
+  height: 75px;
+
+  h1 {
+    font-size: 18pt;
+    color: #2d88ff;
+  }
+}

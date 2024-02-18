@@ -1,0 +1,36 @@
+.container {
+  height: 40px;
+  border: none;
+  border-radius: 4px;
+  font-weight: bold;
+  font-size: 12pt;
+  padding: 0 20px;
+  cursor: pointer;
+
+  &.blue {
+    $color: #2d88ff;
+    background-color: rgba($color, 0.2);
+    color: $color;
+    transition: 450ms ease-out;
+
+    &:hover {
+      transition: 350ms ease-in;
+      background-color: rgba(#ff748b, 0.2);
+      color: #ff748b;
+    }
+  }
+
+  &:hover {
+    animation: moving infinite 1s linear;
+  }
+}
+
+@keyframes moving {
+  0%,
+  100% {
+    transform: rotate(-2deg);
+  }
+  50% {
+    transform: rotate(2deg);
+  }
+}
