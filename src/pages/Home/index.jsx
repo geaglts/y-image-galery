@@ -4,13 +4,14 @@ import { Header } from "../../containers/Header";
 import { Modal } from "../../containers/Modal";
 import { NewMemoryForm } from "../../forms/NewMemoryForm";
 import { Card } from "../../components/Card";
-import { useGlobalContext } from "../../hooks/useGlobalContext";
+import { FullImage } from "../../containers/FullImage";
 
 import styles from "./styles.module.scss";
 
 export function Home() {
   const [images, setImages] = useState([]);
   const [newMemoryFormIsOpen, setNewMemoryForm] = useState(false);
+  const [currentImage, setCurrentImage] = useState(null);
 
   const getImages = async () => {
     try {
@@ -23,6 +24,10 @@ export function Home() {
 
   const onToggleNewMemoryForm = () => {
     setNewMemoryForm(!newMemoryFormIsOpen);
+  };
+
+  const onResetState = () => {
+    setCurrentImage(null);
   };
 
   useEffect(() => {
@@ -40,9 +45,12 @@ export function Home() {
       <Header onClickNewMemory={onToggleNewMemoryForm} />
       <section class={styles.cardsContainer}>
         {images.map((image) => (
-          <Card image={image} />
+          <Card image={image} showImage={setCurrentImage} />
         ))}
       </section>
+      <Modal isOpen={currentImage}>
+        <FullImage currentImage={currentImage} onResetState={onResetState} />
+      </Modal>
     </main>
   );
 }

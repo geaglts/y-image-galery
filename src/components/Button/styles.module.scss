@@ -27,6 +27,20 @@
     transition: 450ms ease-out;
   }
 
+  &.red {
+    $color: #e02a2a;
+    background-color: rgba($color, 0.2);
+    color: $color;
+    transition: 450ms ease-out;
+  }
+
+  &.red-full {
+    $color: #e93232;
+    background-color: $color;
+    color: white;
+    transition: 450ms ease-out;
+  }
+
   &:hover {
     animation: moving infinite 1s linear;
   }
