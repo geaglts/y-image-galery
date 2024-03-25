@@ -20,6 +20,13 @@
     }
   }
 
+  &.green {
+    $color: #08b63c;
+    background-color: rgba($color, 0.2);
+    color: $color;
+    transition: 450ms ease-out;
+  }
+
   &:hover {
     animation: moving infinite 1s linear;
   }
@@ -28,9 +35,9 @@
 @keyframes moving {
   0%,
   100% {
-    transform: rotate(-2deg);
+    transform: rotate(-1deg);
   }
   50% {
-    transform: rotate(2deg);
+    transform: rotate(1deg);
   }
 }

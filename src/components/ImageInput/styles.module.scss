@@ -1,0 +1,39 @@
+.imageInput {
+  background-color: rgba(#2d88ff, 0.1);
+  height: 300px;
+  width: 430px;
+  border-radius: 4px;
+  overflow: hidden;
+  border: 2px dotted #e0e0e0;
+  color: #666666;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 20%;
+  text-align: center;
+  flex-direction: column;
+  cursor: pointer;
+  transition: all 450ms ease-out;
+
+  &:hover {
+    transition: all 350ms ease-in;
+    background-color: rgba(#2d88ff, 0.2);
+    border-color: #2d88ff;
+  }
+
+  &.withImage {
+    border: none;
+    cursor: default;
+    padding: 0;
+  }
+
+  input {
+    display: none;
+  }
+
+  img {
+    height: inherit;
+    width: 100%;
+    object-fit: cover;
+  }
+}

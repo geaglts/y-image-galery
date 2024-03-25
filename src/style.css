@@ -13,3 +13,17 @@
 html {
   background-color: white;
 }
+
+.input {
+  padding: 8px;
+  font-size: 12pt;
+
+  &.bordered {
+    border: 2px solid #e0e0e0;
+    border-radius: 4px;
+  }
+
+  &:focus {
+    outline-color: #2d88ff;
+  }
+}

@@ -1,9 +1,9 @@
 import styles from "./styles.module.scss";
 
-export function Button({ btnStyle = "blue", label, ...props }) {
+export function Button({ btnStyle = "blue", children, ...props }) {
   return (
     <button class={`${styles.container} ${styles[btnStyle]}`} {...props}>
-      {label}
+      {children}
     </button>
   );
 }

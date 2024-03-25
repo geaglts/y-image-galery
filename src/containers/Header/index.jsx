@@ -1,14 +1,14 @@
 import { Button } from "../../components/Button";
 import styles from "./styles.module.scss";
 
-export function Header() {
+export function Header({ onClickNewMemory = () => {} }) {
   return (
     <header class={styles.container}>
       <section>
         <h1>💖</h1>
       </section>
       <section>
-        <Button label="Nuevo recuerdo ✨" />
+        <Button onClick={onClickNewMemory}>Nuevo recuerdo ✨</Button>
       </section>
     </header>
   );
