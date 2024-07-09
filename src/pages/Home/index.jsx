@@ -5,18 +5,22 @@ import { Modal } from "../../containers/Modal";
 import { NewMemoryForm } from "../../forms/NewMemoryForm";
 import { Card } from "../../components/Card";
 import { FullImage } from "../../containers/FullImage";
+import { useGlobalDispatch } from "../../hooks/useGlobalContext.jsx";
 
 import styles from "./styles.module.scss";
 
 export function Home() {
+  const dispatch = useGlobalDispatch();
   const [images, setImages] = useState([]);
   const [newMemoryFormIsOpen, setNewMemoryForm] = useState(false);
   const [currentImage, setCurrentImage] = useState(null);
 
   const getImages = async () => {
     try {
+      dispatch({ type: "toggleLoading" });
       const response = await axios.get("/images/all");
       setImages(response.data.images);
+      dispatch({ type: "toggleLoading" });
     } catch (error) {
       console.log("ups!");
     }

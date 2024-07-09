@@ -1,7 +1,7 @@
 import { render } from "preact";
 import { LocationProvider, Router, Route } from "preact-iso";
 import { Toaster } from "react-hot-toast";
-import { GlobalProvider } from "./hooks/useGlobalContext.js";
+import { GlobalProvider } from "./hooks/useGlobalContext.jsx";
 
 import { Home } from "./pages/Home/index.jsx";
 import { NotFound } from "./pages/_404.jsx";
