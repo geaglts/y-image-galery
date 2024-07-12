@@ -3,9 +3,7 @@
   height: 100%;
   background-color: rgba(#000000, 0.4);
   backdrop-filter: blur(4px);
-  position: absolute;
+  position: fixed;
   top: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  left: 0;
 }

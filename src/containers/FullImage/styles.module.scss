@@ -17,5 +17,14 @@
   img {
     height: 80%;
     object-fit: contain;
+    border-radius: 12px;
+  }
+}
+
+@media (max-width: 720px) {
+  .container {
+    img {
+      width: 95%;
+    }
   }
 }
