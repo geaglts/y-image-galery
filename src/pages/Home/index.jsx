@@ -5,7 +5,7 @@ import { Modal } from "../../containers/Modal";
 import { NewMemoryForm } from "../../forms/NewMemoryForm";
 import { FullImage } from "../../containers/FullImage";
 import { useGlobalDispatch } from "../../hooks/useGlobalContext.jsx";
-import { Mansory } from "./Mansory";
+import { Mansory } from "../../containers/Mansory/index.jsx";
 import data from "./mook";
 
 export function Home(props) {
