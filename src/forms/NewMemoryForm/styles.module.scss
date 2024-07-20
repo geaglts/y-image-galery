@@ -1,4 +1,11 @@
 .container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.form {
   background-color: white;
   padding: 20px;
   border-radius: 4px;
@@ -19,5 +26,26 @@
     display: flex;
     flex-direction: column;
     gap: 8px;
+  }
+}
+
+@media (max-width: 720px) {
+  .form {
+    height: 100%;
+  }
+}
+
+// password input
+.passwordInput {
+  display: grid;
+  grid-template-columns: 1fr auto;
+
+  .button {
+    background-color: transparent;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 8px;
   }
 }

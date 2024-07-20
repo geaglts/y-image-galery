@@ -3,13 +3,12 @@ import axios from "../../services/axios";
 import { Header } from "../../containers/Header";
 import { Modal } from "../../containers/Modal";
 import { NewMemoryForm } from "../../forms/NewMemoryForm";
-import { Card } from "../../components/Card";
 import { FullImage } from "../../containers/FullImage";
 import { useGlobalDispatch } from "../../hooks/useGlobalContext.jsx";
+import { Mansory } from "./Mansory";
+import data from "./mook";
 
-import styles from "./styles.module.scss";
-
-export function Home() {
+export function Home(props) {
   const dispatch = useGlobalDispatch();
   const [images, setImages] = useState([]);
   const [newMemoryFormIsOpen, setNewMemoryForm] = useState(false);
@@ -17,10 +16,14 @@ export function Home() {
 
   const getImages = async () => {
     try {
-      dispatch({ type: "toggleLoading" });
-      const response = await axios.get("/images/all");
-      setImages(response.data.images);
-      dispatch({ type: "toggleLoading" });
+      if (props.query.mock === "true") {
+        setImages(data);
+      } else {
+        dispatch({ type: "toggleLoading" });
+        const response = await axios.get("/images/all");
+        setImages(response.data.images);
+        dispatch({ type: "toggleLoading" });
+      }
     } catch (error) {
       console.log("ups!");
     }
@@ -47,11 +50,7 @@ export function Home() {
         />
       </Modal>
       <Header onClickNewMemory={onToggleNewMemoryForm} />
-      <section class={styles.cardsContainer}>
-        {images.map((image) => (
-          <Card image={image} showImage={setCurrentImage} />
-        ))}
-      </section>
+      <Mansory images={images} setCurrentImage={setCurrentImage} />
       <Modal isOpen={currentImage}>
         <FullImage currentImage={currentImage} onResetState={onResetState} />
       </Modal>

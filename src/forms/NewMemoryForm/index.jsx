@@ -3,11 +3,13 @@ import toast from "react-hot-toast";
 import { Button } from "../../components/Button";
 import styles from "./styles.module.scss";
 import { ImageInput } from "../../components/ImageInput";
-import {
-  useGlobalDispatch,
-  useGlobalContext,
-} from "../../hooks/useGlobalContext";
+import { useGlobalDispatch } from "../../hooks/useGlobalContext";
 import axios from "../../services/axios";
+import { classnames } from "../../utils/classnames";
+
+// icons
+import closeEye from "../../assets/close-eye.svg";
+import openEye from "../../assets/open-eye.svg";
 
 export function NewMemoryForm({ onCloseMemoryForm, reloadImages }) {
   const [image, setImage] = useState(null);
@@ -48,27 +50,45 @@ export function NewMemoryForm({ onCloseMemoryForm, reloadImages }) {
   };
 
   return (
-    <form class={styles.container} onSubmit={onSubmitForm}>
-      <h2>🌼 Agrega una nueva foto 🌼</h2>
-      <ImageInput image={image} setImage={setImage} />
-      <input
-        type="text"
-        name="description"
-        placeholder="Quieres poner una notita para la foto?"
-        class="input bordered"
-      />
-      <input
-        type="text"
-        name="apikey"
-        placeholder="Cuál es la palabra secreta? uwu"
-        class="input bordered"
-      />
-      <div class={styles.buttons}>
-        <Button btnStyle="green">Agrega la fotoo 🙌</Button>
-        <Button type="button" onClick={onCloseMemoryForm}>
-          La subire mas tarde
-        </Button>
-      </div>
-    </form>
+    <section class={styles.container}>
+      <form class={styles.form} onSubmit={onSubmitForm}>
+        <h2>🌼 Agrega una nueva foto 🌼</h2>
+        <ImageInput image={image} setImage={setImage} />
+        <input
+          type="text"
+          name="description"
+          placeholder="Quieres poner una notita para la foto?"
+          class="input bordered"
+        />
+        <PasswordInput
+          name="apikey"
+          placeholder="Cuál es la palabra secreta? uwu"
+          class="input"
+        />
+        <div class={styles.buttons}>
+          <Button btnStyle="green">Agrega la fotoo 🙌</Button>
+          <Button type="button" onClick={onCloseMemoryForm}>
+            La subire mas tarde
+          </Button>
+        </div>
+      </form>
+    </section>
+  );
+}
+
+export function PasswordInput(props) {
+  const [show, setShow] = useState(false);
+
+  return (
+    <div class={classnames("bordered", styles.passwordInput)}>
+      <input type={show ? "text" : "password"} {...props} />
+      <button
+        type="button"
+        onClick={() => setShow(!show)}
+        className={styles.button}
+      >
+        <img src={show ? openEye : closeEye} alt="eye icon" />
+      </button>
+    </div>
   );
 }

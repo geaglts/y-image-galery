@@ -1,6 +1,8 @@
 import styles from "./styles.module.scss";
 
 export function Card({ image, showImage }) {
+  const descriptionIsNull = image.description.length === 0;
+
   const onClickImage = () => {
     showImage(image);
   };
@@ -9,7 +11,7 @@ export function Card({ image, showImage }) {
     <div>
       <div class={styles.container} onClick={onClickImage}>
         <img src={image.image_url} alt={image.description} />
-        <p>{image.description}</p>
+        {!descriptionIsNull && <p>{image.description}</p>}
       </div>
     </div>
   );
