@@ -30,10 +30,60 @@
   input {
     display: none;
   }
+}
 
-  img {
-    height: inherit;
-    width: 100%;
+// images navigation
+.imageViewerContainer {
+  width: 100%;
+}
+
+.imageContainer {
+  position: relative;
+  margin-bottom: 12px;
+
+  & > img {
+    height: 300px;
+    width: 460px;
     object-fit: cover;
+    border-radius: 4px;
+  }
+
+  .imageNavigation {
+    position: absolute;
+    width: 100%;
+    display: grid;
+    align-items: center;
+    grid-template-columns: auto 1fr auto;
+    height: 100%;
+    top: 0px;
+    left: 0px;
+
+    button {
+      background-color: rgba(white, 0.4);
+      backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 50px;
+      border: none;
+      transition: all 450ms;
+      outline: none;
+    }
+
+    button.right {
+      &:hover {
+        $size: 8px;
+        border-radius: $size 0 0 $size;
+        transition: all 350ms;
+      }
+    }
+
+    button.left {
+      &:hover {
+        $size: 8px;
+        border-radius: 0 $size $size 0;
+        transition: all 350ms;
+      }
+    }
   }
 }

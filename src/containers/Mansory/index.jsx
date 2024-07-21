@@ -14,21 +14,31 @@ function getColumnCount() {
 }
 
 export function Mansory({ images, setCurrentImage }) {
-  const [columns, setColumns] = useState(getColumnCount());
+  const [columns, setColumns] = useState([]);
+
+  const updateColumns = () => {
+    const newColumns = getColumnCount();
+
+    // i  = image, c = counter
+    images.forEach((i, c) => {
+      newColumns[c % newColumns.length].push(i);
+    });
+
+    setColumns(newColumns);
+  };
+
+  useEffect(() => {
+    updateColumns();
+  }, [images]);
 
   useEffect(() => {
     const handleResize = () => {
-      setColumns(getColumnCount());
+      updateColumns();
     };
 
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
-
-  // i  = image, c = counter
-  images.forEach((i, c) => {
-    columns[c % columns.length].push(i);
-  });
 
   return (
     <div className={styles.container}>

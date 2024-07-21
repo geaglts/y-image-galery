@@ -12,7 +12,7 @@ import closeEye from "../../assets/close-eye.svg";
 import openEye from "../../assets/open-eye.svg";
 
 export function NewMemoryForm({ onCloseMemoryForm, reloadImages }) {
-  const [image, setImage] = useState(null);
+  const [images, setImages] = useState([]);
   const globalDispatch = useGlobalDispatch();
 
   const onSubmitForm = async (evt) => {
@@ -20,7 +20,7 @@ export function NewMemoryForm({ onCloseMemoryForm, reloadImages }) {
     try {
       globalDispatch({ type: "toggleLoading" });
       const formData = Object.fromEntries(new FormData(evt.target));
-      if (!image) {
+      if (images.length === 0) {
         toast("La foto es necesaria jsjsjs");
         return;
       }
@@ -28,20 +28,31 @@ export function NewMemoryForm({ onCloseMemoryForm, reloadImages }) {
         toast("La palabra secreta es necesaria jsjsjs");
         return;
       }
-      const response = await axios.post(
-        "/images",
-        {
-          description: formData.description,
-          base64: image,
-        },
-        { headers: { authorization: formData.apikey } }
+
+      const imagesRequest = images.map((i) =>
+        axios.post(
+          "/images",
+          { description: i.description, base64: i.src },
+          { headers: { Authorization: formData.apikey } }
+        )
       );
-      toast(response.data.message);
-      if (!response.data.error) {
+
+      const loadingId = toast.loading("Las imágenes se están subiendo");
+
+      const response = await Promise.all(imagesRequest);
+
+      const isUploaded = response.every((i) =>
+        i.data.message.includes("éxito")
+      );
+
+      if (isUploaded) {
         await reloadImages();
         onCloseMemoryForm();
+        toast.success("Las fotos han sido subida con éxito 🙌");
       } else {
+        toast.error("No se pudieron cargar las imágenes");
       }
+      toast.dismiss(loadingId);
     } catch (error) {
       //   console.log(error);
     } finally {
@@ -53,13 +64,7 @@ export function NewMemoryForm({ onCloseMemoryForm, reloadImages }) {
     <section class={styles.container}>
       <form class={styles.form} onSubmit={onSubmitForm}>
         <h2>🌼 Agrega una nueva foto 🌼</h2>
-        <ImageInput image={image} setImage={setImage} />
-        <input
-          type="text"
-          name="description"
-          placeholder="Quieres poner una notita para la foto?"
-          class="input bordered"
-        />
+        <ImageInput images={images} setImages={setImages} />
         <PasswordInput
           name="apikey"
           placeholder="Cuál es la palabra secreta? uwu"

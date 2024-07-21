@@ -50,7 +50,9 @@ export function Home(props) {
         />
       </Modal>
       <Header onClickNewMemory={onToggleNewMemoryForm} />
-      <Mansory images={images} setCurrentImage={setCurrentImage} />
+      {images.length > 0 && (
+        <Mansory images={images} setCurrentImage={setCurrentImage} />
+      )}
       <Modal isOpen={currentImage}>
         <FullImage currentImage={currentImage} onResetState={onResetState} />
       </Modal>
