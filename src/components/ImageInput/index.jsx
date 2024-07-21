@@ -77,7 +77,7 @@ export function ImageInput({ images, setImages }) {
     >
       {images.length === 0 && (
         <>
-          Pícale aquí para escoger la foto que quieres subir 7u7 📷
+          Pícale aquí para escoger las fotos que quieres subir 7u7 📷
           <input
             id="image-file"
             type="file"
