@@ -48,7 +48,7 @@ export function NewMemoryForm({ onCloseMemoryForm, reloadImages }) {
       if (isUploaded) {
         await reloadImages();
         onCloseMemoryForm();
-        toast.success("Las fotos han sido subida con éxito 🙌");
+        toast.success("Las fotos han sido subidas con éxito 🙌");
       } else {
         toast.error("No se pudieron cargar las imágenes");
       }
@@ -71,7 +71,7 @@ export function NewMemoryForm({ onCloseMemoryForm, reloadImages }) {
           class="input"
         />
         <div class={styles.buttons}>
-          <Button btnStyle="green">Agrega la fotoo 🙌</Button>
+          <Button btnStyle="green">Agrega la fotoos 🙌</Button>
           <Button type="button" onClick={onCloseMemoryForm}>
             La subire mas tarde
           </Button>
